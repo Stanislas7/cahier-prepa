@@ -15,7 +15,7 @@ une fois unique par le script d'installation que vous devez lancer pour
 terminer l'installation. */
 $serveur = 'localhost';
 $base = '';
-$mdp = '';
+$mdp = 'Hs4!tU9z^Qe2Bn7x@VmK';
 
 // Mail administrateur
 // Adresse dont proviendront les mails envoyés par l'interface et où seront

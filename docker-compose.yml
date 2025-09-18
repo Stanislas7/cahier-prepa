@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cahier-app
+    depends_on:
+      - db
+    environment:
+      # Adjust to your timezone
+      - TZ=Europe/Paris
+    volumes:
+      # Persist user uploads/backups/RSS outside the image
+      - ./app:/var/www/html
+      - ./data/documents:/var/www/html/documents
+      - ./data/sauvegarde:/var/www/html/sauvegarde
+      - ./data/rss:/var/www/html/rss
+    ports:
+      - "8080:80"  # or put this behind your reverse proxy (Traefik/Caddy/nginx)
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.11
+    container_name: cahier-db
+    environment:
+      - MYSQL_DATABASE=cahier
+      - MYSQL_USER=cahier
+      - MYSQL_PASSWORD=k93FzP5u!Xx2@rLs7bQt
+      - MYSQL_ROOT_PASSWORD=Yx8r!ZtR3b@pMwq4Nv9K
+      - TZ=Europe/Paris
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
+
+volumes: {}
